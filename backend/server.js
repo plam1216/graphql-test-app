@@ -1,12 +1,21 @@
 const express = require('express')
+const mongoose = require('mongoose')
+require('dotenv').config()
 
 // Destructure functions
 const { graphqlHTTP } = require('express-graphql')
-
 const schema = require('./schema/schema')
 
 const PORT = 4000
 const app = express()
+
+
+mongoose.connect(process.env.MONGO_URI)
+
+const db = mongoose.connection
+db.on('connected', () => console.log("Connected to MongoDB"))
+db.on('disconnected', () => console.log("Disconnected from MongoDB"))
+db.on('error', (err) => console.log(err + "error connecting to MongoDB"))
 
 
 app.use('/graphql', graphqlHTTP({
