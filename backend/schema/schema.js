@@ -43,6 +43,7 @@ const BookType = new GraphQLObjectType({
             resolve(parent, args) {
                 // console.log(parent)
                 // return _.find(authors, { id: parent.authorId })
+                return Author.findById(parent.authorId)
             }
         }
     })
@@ -62,6 +63,7 @@ const AuthorType = new GraphQLObjectType({
             // return books where authorId equals parent.id
             resolve(parent, args) {
                 // return _.filter(books, {authorId: parent.id})
+                return Book.find({ authorId: parent.id })
             }
         }
 
@@ -71,9 +73,11 @@ const AuthorType = new GraphQLObjectType({
 ////////////////////
 // GraphiQL Query //
 ////////////////////
-// book(id: '1') {
-//  name: 'Book1',
-//  genre: 'fiction',
+// {
+//  book(id: '1') {
+//   name: 'Book1',
+//   genre: 'fiction',
+//  }
 // }
 
 const RootQuery = new GraphQLObjectType({
@@ -92,6 +96,8 @@ const RootQuery = new GraphQLObjectType({
 
                 // _.find is a lodash method
                 // return _.find(books, { id: args.id })
+
+                return Book.findById(args.id)
             }
         },
         author: {
@@ -99,6 +105,7 @@ const RootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
                 // return _.find(authors, { id: args.id })
+                return Author.findById(args.id)
             }
         },
 
@@ -107,6 +114,7 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(BookType),
             resolve(parent, args) {
                 // return books
+                return Book.find({})
             }
         },
 
@@ -115,6 +123,7 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(AuthorType),
             resolve(parent, args) {
                 // return authors
+                return Author.find({})
             }
         }
     }
