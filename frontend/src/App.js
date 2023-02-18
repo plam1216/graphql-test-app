@@ -1,8 +1,22 @@
+import { ApolloClient, ApolloProvider } from '@apollo/client'
+
+// Components
+import BookList from "./BookList/BookList";
+
+
+// Apollo Client setup
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql'
+})
+
+
 function App() {
   return (
-    <div className="App">
-      Hello
-    </div>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <BookList />
+      </div>
+    </ApolloProvider>
   );
 }
 
