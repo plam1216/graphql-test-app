@@ -1,7 +1,8 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
 // Components
-import BookList from "./BookList/BookList";
+import BookList from "./Components/BookList/BookList";
+import AddBook from "./Components/AddBook/AddBook";
 
 
 // Apollo Client setup
@@ -17,6 +18,7 @@ function App() {
       <div className="App">
         <h1>Book List</h1>
         <BookList />
+        <AddBook />
       </div>
     </ApolloProvider>
   );
