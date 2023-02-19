@@ -16,7 +16,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <h1>Book List</h1>
+        <h1 style={{textAlign: "center"}}>Book List</h1>
         <BookList />
         <AddBook />
       </div>
